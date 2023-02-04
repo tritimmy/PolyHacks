@@ -1,12 +1,8 @@
 extends Node2D
 
-var widht = 10
-var heigth = widht 
-var number_of_spots = widht * heigth
-var width = 20
+var width = 10
 var height = width 
 var number_of_spots = width * height
-
 var map = []
 var angry_meeple_list = []
 var empty_spots_index = []
@@ -15,10 +11,10 @@ var ratio_empty_spots = 0.2
 var acceptance_ratio = 0.5
 var ratio_of_meeple = [0.4, 0.4, 0, 0, 0, 0, 0, 0]
 
-onready var meeple_position_x = 0
-onready var meeple_position_y = 0
+onready var meeple_position_x = 32
+onready var meeple_position_y = 32
 var meeple = preload("res://Meeple.tscn")
-var meeple_instance = meeple.instance()
+
 
 func _ready():
 	randomize()
@@ -82,18 +78,38 @@ func initialize():
 				while map[new_position] != 0:
 					new_position = randi() % number_of_spots
 				map[new_position] = j+1
+	print(map)
 
 func meeple_generator():
 	for i in range(len(map)):
-		var valeur = map[i]
-		if valeur == 0:
-			pass
-		elif valeur == 1:
+		var right = i % width == width-1
+		var meeple_color = map[i]
+		if meeple_color == 1:
 			spawn_meeple()
-		elif valeur == 2:
+		elif meeple_color == 2:
 			spawn_meeple()
+		elif meeple_color == 3:
+			spawn_meeple()
+		elif meeple_color == 4:
+			spawn_meeple()
+		elif meeple_color == 5:
+			spawn_meeple()
+		elif meeple_color == 6:
+			spawn_meeple()
+		elif meeple_color == 7:
+			spawn_meeple()
+		elif meeple_color == 8:
+			spawn_meeple()
+			
+		if right: 
+			meeple_position_x = 32
+			meeple_position_y += 64
+		else:
+			meeple_position_x += 64
+		
 
 func spawn_meeple():
+	var meeple_instance = meeple.instance()
 	add_child(meeple_instance)
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
