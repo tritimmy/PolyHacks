@@ -9,7 +9,7 @@ var empty_spots_index = []
 var number_of_colors = 2
 var ratio_empty_spots = 0.2
 var acceptance_ratio = 0.5
-var ratio_of_meeple = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+var ratio_of_meeple = [0.4, 0.4, 0, 0, 0, 0, 0, 0]
 
 
 func _ready():
