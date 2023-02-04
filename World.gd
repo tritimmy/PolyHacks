@@ -56,3 +56,6 @@ func initialize():
 					new_position = randi() % number_of_spots
 				map[new_position] = j+1
 	print(map)
+
+func meeple_generator():
+	pass
