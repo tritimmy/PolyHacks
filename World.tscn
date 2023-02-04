@@ -25,3 +25,4 @@ position = Vector2( 159, 69 )
 scale = Vector2( 1.53125, 1.40625 )
 
 [node name="Tolerance" parent="." instance=ExtResource( 3 )]
+z_index = 1
