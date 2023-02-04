@@ -1,6 +1,7 @@
 extends Area2D
 
 onready var ray = $RayCast2D
+onready var sprite = $Sprite
 
 var tile_size = 64
 var inputs = {"ui_right": Vector2.RIGHT,
@@ -19,3 +20,6 @@ func _unhandled_input(event):
 
 func move(dir):
 	position += inputs[dir] * tile_size
+
+func change_sprite(color, state):
+	sprite.set_frame(2 * color + state)
