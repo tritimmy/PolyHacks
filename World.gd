@@ -5,7 +5,6 @@ var heigth = widht
 var number_of_spots = widht * heigth
 var width = 20
 var height = width 
-var number_of_spots = width * height
 
 var map = []
 var angry_meeple_list = []
