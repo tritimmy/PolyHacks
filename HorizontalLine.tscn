@@ -1,0 +1,10 @@
+[gd_scene format=2]
+
+[node name="HorizontalLine" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2( 26.0882, 0.495294 )
+rotation = -1.5708
+scale = Vector2( 0.499549, 1.05068 )
+points = PoolVector2Array( 1, -148, 1, 739 )
+default_color = Color( 0.407843, 0.580392, 0.4, 1 )
