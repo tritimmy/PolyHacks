@@ -3,6 +3,10 @@ extends Node2D
 var widht = 10
 var heigth = widht 
 var number_of_spots = widht * heigth
+var width = 20
+var height = width 
+var number_of_spots = width * height
+
 var map = []
 var angry_meeple_list = []
 var empty_spots_index = []
@@ -28,10 +32,28 @@ func set_ration_empty_spots(new_ratio):
 	ratio_empty_spots = new_ratio
 	
 func set_acceptance_ratio(new_ratio):
-	acceptance_ratio
+	acceptance_ratio = new_ratio
 	
 func simulation():
-	pass
+	var end = true
+	for i in range (len(map)):
+		var number_of_meeple
+		var number_of_similar_meeple
+		if map[i] != 0:
+			var meeple_color = map[i]
+			var left = i % width == 0 
+			var right = i % width == width-1
+			var up = i < width
+			var down = i > width*(height-1)-1
+			
+			if !left:
+				pass
+		#if(number_of_similar_meeple/number_of_meeple) < acceptance_ratio:
+			
+			
+	if end == false:
+		teleport_meeples()
+		
 
 func teleport_meeples():
 	for index in range(len(map)):
@@ -57,10 +79,9 @@ func initialize():
 			var number_of_specific_meeple = floor(ratio_of_meeple[j] * number_of_spots)
 			for k in range(number_of_specific_meeple):
 				var new_position = randi() % number_of_spots
-				while map[new_position] > 0:
+				while map[new_position] != 0:
 					new_position = randi() % number_of_spots
 				map[new_position] = j+1
-	print(map)
 
 func meeple_generator():
 	for i in range(len(map)):
@@ -76,3 +97,4 @@ func spawn_meeple():
 	add_child(meeple_instance)
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
+
