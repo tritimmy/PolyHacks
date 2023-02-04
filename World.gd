@@ -73,4 +73,4 @@ func initialize():
 				while map[new_position] != 0:
 					new_position = randi() % number_of_spots
 				map[new_position] = j+1
-				
+

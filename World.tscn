@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://Grid.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Meeple.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Tolerance.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/carte.jpeg" type="Texture" id=4]
+[ext_resource path="res://Crown.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="BackgroundMap" type="Sprite" parent="."]
 modulate = Color( 0.568627, 0.568627, 0.568627, 1 )
-position = Vector2( 320.5, 319.5 )
+position = Vector2( 320, 319 )
 scale = Vector2( 0.679787, 0.907407 )
 texture = ExtResource( 4 )
 
@@ -19,4 +20,8 @@ format = 1
 
 [node name="GridGenerator" parent="." instance=ExtResource( 2 )]
 
-[node name="Meeple" parent="." instance=ExtResource( 3 )]
+[node name="Crown" parent="." instance=ExtResource( 5 )]
+position = Vector2( 159, 69 )
+scale = Vector2( 1.53125, 1.40625 )
+
+[node name="Tolerance" parent="." instance=ExtResource( 3 )]
