@@ -1,6 +1,6 @@
 extends Node2D
 
-var widht = 20
+var widht = 10
 var heigth = widht 
 var number_of_spots = widht * heigth
 var map = []
@@ -11,10 +11,15 @@ var ratio_empty_spots = 0.2
 var acceptance_ratio = 0.5
 var ratio_of_meeple = [0.4, 0.4, 0, 0, 0, 0, 0, 0]
 
+onready var meeple_position_x = 0
+onready var meeple_position_y = 0
+var meeple = preload("res://Meeple.tscn")
+var meeple_instance = meeple.instance()
 
 func _ready():
 	randomize()
 	initialize()
+	meeple_generator()
 
 func set_number_of_colors(new_number):
 	number_of_colors = new_number
@@ -58,4 +63,16 @@ func initialize():
 	print(map)
 
 func meeple_generator():
-	pass
+	for i in range(len(map)):
+		var valeur = map[i]
+		if valeur == 0:
+			pass
+		elif valeur == 1:
+			spawn_meeple()
+		elif valeur == 2:
+			spawn_meeple()
+
+func spawn_meeple():
+	add_child(meeple_instance)
+	meeple_instance.position.x = meeple_position_x
+	meeple_instance.position.y = meeple_position_y

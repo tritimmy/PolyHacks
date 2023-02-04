@@ -1,4 +1,6 @@
 extends Node2D
 
-func _process(delta):
-	$Label.text = "Tolerance: " + str($HSlider.value) + "%"
+onready var tolerance_value = $HSlider.value
+
+func _process(_delta):
+	$Label.text = "Tolerance: " + str(tolerance_value) + "%"
