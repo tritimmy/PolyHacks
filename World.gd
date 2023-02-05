@@ -15,13 +15,11 @@ onready var meeple_position_x = 32
 onready var meeple_position_y = 32
 var meeple = preload("res://Meeple.tscn")
 
-onready var teleporting_meeples = true
+onready var teleporting_meeples = false
 
 func _ready():
 	randomize()
 	initialize()
-	meeple_generator()
-	simulation()
 
 func set_number_of_colors(new_number):
 	number_of_colors = new_number
@@ -96,6 +94,7 @@ func simulation():
 	if end == false:
 		teleporting_meeples = true
 		
+		
 
 func teleport_meeples():
 	for index in range(len(map)):
@@ -111,6 +110,7 @@ func teleport_meeples():
 		empty_spots_index.remove(end_position)
 		
 	angry_meeple_list.clear()
+	meeple_generator()
 	simulation()
 	
 	
@@ -168,7 +168,15 @@ func spawn_meeple2():
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
 
-
 func _on_Timer_timeout():
 	if teleporting_meeples == true:
 		teleport_meeples()
+
+func _process(_delta):
+	$Tolerance/Label.text = "Tolerance: " + str($Tolerance/HSlider.value) + "%"
+	acceptance_ratio = $Tolerance/HSlider.value
+
+
+func _on_Button_pressed():
+	teleporting_meeples = true
+	simulation()
