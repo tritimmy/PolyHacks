@@ -30,10 +30,10 @@ func _on_Meeple_input_event(_viewport, _event, _shape_idx):
 func set_meeple_mood(_mood):
 	if _mood == "happy":
 		mood = "happy"
-		change_sprite(0, 0)
+		sprite.set_frame(1)
 	if mood == "angry":
 		mood = "angry"
-		change_sprite(0, 1)
+		sprite.set_frame(0)
 
 func kill():
 	queue_free()
