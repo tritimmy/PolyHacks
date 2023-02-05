@@ -46,5 +46,25 @@ margin_right = 588.0
 margin_bottom = 609.0
 text = "Tolerance: 0%"
 
+[node name="Colors" type="Node2D" parent="."]
+position = Vector2( 18, 36 )
+z_index = 2
+
+[node name="HSlider" type="HSlider" parent="Colors"]
+margin_left = 174.0
+margin_top = 568.0
+margin_right = 252.0
+margin_bottom = 584.0
+min_value = 1.0
+max_value = 8.0
+value = 1.0
+
+[node name="Label" type="Label" parent="Colors"]
+margin_left = 150.0
+margin_top = 556.0
+margin_right = 276.0
+margin_bottom = 570.0
+text = "Amount of colors: 1"
+
 [connection signal="pressed" from="Button/Button" to="." method="_on_Button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
