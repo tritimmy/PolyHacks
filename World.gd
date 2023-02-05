@@ -87,7 +87,7 @@ func meeple_generator():
 		if meeple_color == 1:
 			spawn_meeple()
 		elif meeple_color == 2:
-			spawn_meeple()
+			spawn_meeple2()
 		elif meeple_color == 3:
 			spawn_meeple()
 		elif meeple_color == 4:
@@ -114,3 +114,9 @@ func spawn_meeple():
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
 
+func spawn_meeple2():
+	var meeple_instance = meeple.instance()
+	meeple_instance.modulate = Color(0,255,255)
+	add_child(meeple_instance)
+	meeple_instance.position.x = meeple_position_x
+	meeple_instance.position.y = meeple_position_y
