@@ -97,15 +97,12 @@ func simulation():
 			if number_of_adjacent_meeple != 0 and (number_of_similar_meeple/number_of_adjacent_meeple) < (1.0-acceptance_ratio):
 				end = false
 				angry_meeple_list.append(i)
-				if object_meeple[i] != null:
-					object_meeple[i].set_meeple_mood("angry")
 			else:
 				if object_meeple[i] != null:
 					object_meeple[i].set_meeple_mood("happy")
 			
-			
 	if end == false:
-		#print(angry_meeple_list)
+		print(angry_meeple_list)
 		teleporting_meeples = true
 		
 		
@@ -131,9 +128,7 @@ func teleport_meeples():
 	for wr in wr_list:
 		var obj = wr.get_ref()
 		if (obj):
-			wr.get_ref().kill()
 			obj.free()
-	wr_list.clear()
 	meeple_generator()
 	simulation()
 	
@@ -159,20 +154,28 @@ func meeple_generator():
 		var meeple_color = map[i]
 		if meeple_color == 1:
 			spawn_meeple()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 2:
 			spawn_meeple2()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 3:
 			spawn_meeple3()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 4:
 			spawn_meeple4()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 5:
 			spawn_meeple5()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 6:
 			spawn_meeple6()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 7:
 			spawn_meeple7()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 8:
 			spawn_meeple8()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 0:
 			object_meeple.append(null)
 			
@@ -181,7 +184,6 @@ func meeple_generator():
 			meeple_position_y += 640/height
 		else:
 			meeple_position_x += 640/width
-		
 
 func spawn_meeple():
 	var meeple_instance = meeple.instance()
