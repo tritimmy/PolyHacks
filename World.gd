@@ -9,7 +9,7 @@ var empty_spots_index = []
 var number_of_colors = 2
 var ratio_empty_spots = 0.2
 var acceptance_ratio = 0.5
-var ratio_of_meeple = [0.4, 0.4, 0, 0, 0, 0, 0, 0]
+var ratio_of_meeple = [0.2, 0.2, 0.2, 0.2, 0, 0, 0, 0]
 
 onready var meeple_position_x = 32
 onready var meeple_position_y = 32
@@ -134,23 +134,23 @@ func meeple_generator():
 		elif meeple_color == 2:
 			spawn_meeple2()
 		elif meeple_color == 3:
-			spawn_meeple()
+			spawn_meeple3()
 		elif meeple_color == 4:
-			spawn_meeple()
+			spawn_meeple4()
 		elif meeple_color == 5:
-			spawn_meeple()
+			spawn_meeple5()
 		elif meeple_color == 6:
-			spawn_meeple()
+			spawn_meeple6()
 		elif meeple_color == 7:
-			spawn_meeple()
+			spawn_meeple7()
 		elif meeple_color == 8:
-			spawn_meeple()
+			spawn_meeple8()
 			
 		if right: 
-			meeple_position_x = 32
-			meeple_position_y += 64
+			meeple_position_x = 320/width
+			meeple_position_y += 640/height
 		else:
-			meeple_position_x += 64
+			meeple_position_x += 640/width
 		
 
 func spawn_meeple():
@@ -162,6 +162,48 @@ func spawn_meeple():
 func spawn_meeple2():
 	var meeple_instance = meeple.instance()
 	meeple_instance.modulate = Color(0,255,255)
+	add_child(meeple_instance)
+	meeple_instance.position.x = meeple_position_x
+	meeple_instance.position.y = meeple_position_y
+	
+func spawn_meeple3():
+	var meeple_instance = meeple.instance()
+	meeple_instance.modulate = Color(255,0,255)
+	add_child(meeple_instance)
+	meeple_instance.position.x = meeple_position_x
+	meeple_instance.position.y = meeple_position_y
+	
+func spawn_meeple4():
+	var meeple_instance = meeple.instance()
+	meeple_instance.modulate = Color(0,0,255)
+	add_child(meeple_instance)
+	meeple_instance.position.x = meeple_position_x
+	meeple_instance.position.y = meeple_position_y
+	
+func spawn_meeple5():
+	var meeple_instance = meeple.instance()
+	meeple_instance.modulate = Color(225,0,0)
+	add_child(meeple_instance)
+	meeple_instance.position.x = meeple_position_x
+	meeple_instance.position.y = meeple_position_y
+	
+func spawn_meeple6():
+	var meeple_instance = meeple.instance()
+	meeple_instance.modulate = Color(0,255,0)
+	add_child(meeple_instance)
+	meeple_instance.position.x = meeple_position_x
+	meeple_instance.position.y = meeple_position_y
+	
+func spawn_meeple7():
+	var meeple_instance = meeple.instance()
+	meeple_instance.modulate = Color(225,255,255)
+	add_child(meeple_instance)
+	meeple_instance.position.x = meeple_position_x
+	meeple_instance.position.y = meeple_position_y
+	
+func spawn_meeple8():
+	var meeple_instance = meeple.instance()
+	meeple_instance.modulate = Color(0,0,0)
 	add_child(meeple_instance)
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
