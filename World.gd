@@ -28,9 +28,7 @@ func _ready():
 	for wr in wr_list:
 		var obj = wr.get_ref()
 		if (obj):
-			wr.get_ref().kill()
 			obj.free()
-	wr_list.clear()
 	meeple_generator()
 	
 
