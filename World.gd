@@ -36,6 +36,7 @@ func set_acceptance_ratio(new_ratio):
 	
 func simulation():
 	var end = true
+	teleporting_meeples = false
 	for i in range (len(map)):
 		var number_of_adjacent_meeple = 0
 		var number_of_similar_meeple = 0
