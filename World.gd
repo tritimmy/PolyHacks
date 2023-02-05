@@ -20,6 +20,7 @@ func _ready():
 	randomize()
 	initialize()
 	meeple_generator()
+	simulation()
 
 func set_number_of_colors(new_number):
 	number_of_colors = new_number
@@ -33,8 +34,8 @@ func set_acceptance_ratio(new_ratio):
 func simulation():
 	var end = true
 	for i in range (len(map)):
-		var number_of_meeple
-		var number_of_similar_meeple
+		var number_of_adjacent_meeple = 0
+		var number_of_similar_meeple = 0
 		if map[i] != 0:
 			var meeple_color = map[i]
 			var left = i % width == 0 
@@ -43,8 +44,53 @@ func simulation():
 			var down = i > width*(height-1)-1
 			
 			if !left:
-				pass
-		#if(number_of_similar_meeple/number_of_meeple) < acceptance_ratio:
+				if map[i-1] != 0 :
+					number_of_adjacent_meeple += 1
+					if map[i-1] == meeple_color:
+						number_of_similar_meeple += 1
+				if !up:
+					if map[i-1-width] != 0 :
+						number_of_adjacent_meeple += 1
+						if map[i-1-width] == meeple_color:
+							number_of_similar_meeple +=1
+				if !down:
+					if map[i-1+width] != 0 :
+						number_of_adjacent_meeple += 1
+						if map[i-1+width] == meeple_color:
+							number_of_similar_meeple +=1
+						
+			if !right:
+				if map[i+1] != 0:
+					number_of_adjacent_meeple += 1
+					if map[i+1] == meeple_color:
+						number_of_similar_meeple += 1
+				if !up:
+					if map[i+1-width] != 0:
+						number_of_adjacent_meeple += 1
+						if map[i+1-width] == meeple_color:
+							number_of_similar_meeple +=1
+				if !down:
+					if map[i+1+width] != 0:
+						number_of_adjacent_meeple += 1
+						if map[i+1+width] == meeple_color:
+							number_of_similar_meeple +=1
+						
+			if !up:
+				if map[i-width] != 0:
+					number_of_adjacent_meeple += 1
+					if map[i-width] == meeple_color:
+						number_of_similar_meeple +=1
+					
+			if !down:
+				if map[i+width] != 0:
+					number_of_adjacent_meeple += 1
+					if map[i+width] == meeple_color:
+						number_of_similar_meeple += 1
+				
+		if number_of_adjacent_meeple != 0 and (number_of_similar_meeple/number_of_adjacent_meeple) < acceptance_ratio:
+			end = false
+			print(number_of_adjacent_meeple)
+			angry_meeple_list.append(i)
 			
 			
 	if end == false:
