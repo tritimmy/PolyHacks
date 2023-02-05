@@ -282,6 +282,9 @@ func _on_Button_pressed():
 	teleporting_meeples = true
 	simulation()
 
+func _on_Reset_pressed():
+	get_tree().reload_current_scene()
+
 func set_colors(colors):
 	$Colors/Label.text = "Amount of Colors: " + str(colors)
 	$Colors/HSlider.value = colors
