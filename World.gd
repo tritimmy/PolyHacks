@@ -7,10 +7,12 @@ var map = []
 var wr_list = []
 var angry_meeple_list = []
 var empty_spots_index = []
-var number_of_colors = 2
+var number_of_colors = 1
 var ratio_empty_spots = 0.2
 var acceptance_ratio = 50
-var ratio_of_meeple = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+var ratio_of_meeple = [0.8,0,0,0,0,0,0,0]
+var old_color_slider_number = number_of_colors
+
 
 onready var meeple_position_x = 32
 onready var meeple_position_y = 32
@@ -22,11 +24,21 @@ func _ready():
 	randomize()
 	set_tolerance(acceptance_ratio)
 	initialize()
+	for wr in wr_list:
+		var obj = wr.get_ref()
+		if (obj):
+			wr.get_ref().kill()
+			obj.free()
+	wr_list.clear()
 	meeple_generator()
 	
 
 func set_number_of_colors(new_number):
 	number_of_colors = new_number
+	ratio_of_meeple = [0,0,0,0,0,0,0,0]
+	for i in range(number_of_colors):
+		ratio_of_meeple[i] = 0.8/number_of_colors
+		_ready()
 	
 func set_ration_empty_spots(new_ratio):
 	ratio_empty_spots = new_ratio
@@ -99,7 +111,6 @@ func simulation():
 			
 			
 	if end == false:
-		print(angry_meeple_list)
 		teleporting_meeples = true
 		
 		
@@ -116,9 +127,8 @@ func teleport_meeples():
 		map[end_position] = map[start_position]
 		map[start_position] = 0
 		empty_spots_index.append(start_position)
-		#print(empty_spots_index)
 		empty_spots_index.remove(empty_spots_index.find(end_position))
-		#print(empty_spots_index)
+
 	
 	empty_spots_index.clear()
 	angry_meeple_list.clear()
@@ -133,6 +143,7 @@ func teleport_meeples():
 	
 	
 func initialize():
+	map.clear()
 	for _i in range(number_of_spots): # Resize
 		map.append(0)
 	for _j in range(len(ratio_of_meeple)):
@@ -143,6 +154,7 @@ func initialize():
 				while map[new_position] != 0:
 					new_position = randi() % number_of_spots
 				map[new_position] = _j+1
+
 
 
 func meeple_generator():
@@ -266,4 +278,6 @@ func _on_Button_pressed():
 func set_colors(colors):
 	$Colors/Label.text = "Amount of Colors: " + str(colors)
 	$Colors/HSlider.value = colors
-	number_of_colors = colors
+	if colors != old_color_slider_number:
+		set_number_of_colors(colors)
+		old_color_slider_number = colors
