@@ -252,6 +252,7 @@ func _on_Timer_timeout():
 
 func _process(_delta):
 	set_tolerance($Tolerance/HSlider.value)
+	set_colors($Colors/HSlider.value)
 
 func set_tolerance(tolerance):
 	$Tolerance/Label.text = "Tolerance: " + str(tolerance) + "%"
@@ -261,3 +262,8 @@ func set_tolerance(tolerance):
 func _on_Button_pressed():
 	teleporting_meeples = true
 	simulation()
+
+func set_colors(colors):
+	$Colors/Label.text = "Amount of Colors: " + str(colors)
+	$Colors/HSlider.value = colors
+	number_of_colors = colors
