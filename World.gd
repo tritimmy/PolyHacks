@@ -9,7 +9,7 @@ var empty_spots_index = []
 var number_of_colors = 2
 var ratio_empty_spots = 0.2
 var acceptance_ratio = 0.5
-var ratio_of_meeple = [0.2, 0.2, 0.2, 0.2, 0, 0, 0, 0]
+var ratio_of_meeple = [0.4, 0.4, 0, 0, 0, 0, 0, 0]
 
 onready var meeple_position_x = 32
 onready var meeple_position_y = 32
@@ -102,14 +102,18 @@ func teleport_meeples():
 		if map[index] == 0:
 			empty_spots_index.append(index)
 
-	for start_position in angry_meeple_list:
+	for i in range (len(angry_meeple_list)):
 		var random_empty_spot = randi() % len(empty_spots_index)
 		var end_position = empty_spots_index[random_empty_spot]
+		var start_position = angry_meeple_list[i]
 		map[end_position] = map[start_position]
 		map[start_position] = 0
 		empty_spots_index.append(start_position)
-		empty_spots_index.remove(end_position)
-		
+		print(empty_spots_index)
+		empty_spots_index.pop(end_position)
+		print(empty_spots_index)
+	
+	empty_spots_index.clear()
 	angry_meeple_list.clear()
 	simulation()
 	
@@ -125,7 +129,7 @@ func initialize():
 				while map[new_position] != 0:
 					new_position = randi() % number_of_spots
 				map[new_position] = j+1
-	print(map)
+
 
 func meeple_generator():
 	for i in range(len(map)):
@@ -157,6 +161,7 @@ func meeple_generator():
 
 func spawn_meeple():
 	var meeple_instance = meeple.instance()
+
 	add_child(meeple_instance)
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
