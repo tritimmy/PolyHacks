@@ -9,7 +9,7 @@ var angry_meeple_list = []
 var empty_spots_index = []
 var number_of_colors = 2
 var ratio_empty_spots = 0.2
-var acceptance_ratio = 50
+var acceptance_ratio = 0.5
 var ratio_of_meeple = [0.4, 0.4, 0, 0, 0, 0, 0, 0]
 
 onready var meeple_position_x = 32
@@ -90,12 +90,15 @@ func simulation():
 					if map[i+width] == meeple_color:
 						number_of_similar_meeple += 1
 				
-		if number_of_adjacent_meeple != 0 and (number_of_similar_meeple/number_of_adjacent_meeple) < acceptance_ratio:
-			end = false
-			angry_meeple_list.append(i)
+			number_of_adjacent_meeple = float(number_of_adjacent_meeple)
+			number_of_similar_meeple = float(number_of_similar_meeple)
+			if number_of_adjacent_meeple != 0 and (number_of_similar_meeple/number_of_adjacent_meeple) < acceptance_ratio:
+				end = false
+				angry_meeple_list.append(i)
 			
 			
 	if end == false:
+		print(angry_meeple_list)
 		teleporting_meeples = true
 		
 		
