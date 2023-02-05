@@ -90,7 +90,6 @@ func simulation():
 				
 		if number_of_adjacent_meeple != 0 and (number_of_similar_meeple/number_of_adjacent_meeple) < acceptance_ratio:
 			end = false
-			print(number_of_adjacent_meeple)
 			angry_meeple_list.append(i)
 			
 			
