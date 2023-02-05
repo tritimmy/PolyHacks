@@ -145,8 +145,9 @@ func initialize():
 
 
 func meeple_generator():
+	meeple_position_y = 640/height/2
 	for i in range(len(map)):
-		var right = i % width == width-1
+		var right = (i % width == width-1)
 		var meeple_color = map[i]
 		if meeple_color == 1:
 			spawn_meeple()
