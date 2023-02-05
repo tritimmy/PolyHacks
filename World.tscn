@@ -66,5 +66,16 @@ margin_right = 276.0
 margin_bottom = 570.0
 text = "Amount of colors: 1"
 
+[node name="btnReset" type="Node2D" parent="."]
+z_index = 2
+
+[node name="Reset" type="Button" parent="btnReset"]
+margin_left = 20.0
+margin_top = 604.0
+margin_right = 68.0
+margin_bottom = 624.0
+text = "Reset"
+
 [connection signal="pressed" from="Button/Button" to="." method="_on_Button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="btnReset/Reset" to="." method="_on_Reset_pressed"]

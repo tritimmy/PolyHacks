@@ -5,6 +5,7 @@ var height = width
 var number_of_spots = width * height
 var map = []
 var wr_list = []
+var object_meeple = []
 var angry_meeple_list = []
 var empty_spots_index = []
 var number_of_colors = 1
@@ -108,7 +109,9 @@ func simulation():
 			if number_of_adjacent_meeple != 0 and (number_of_similar_meeple/number_of_adjacent_meeple) < (1.0-acceptance_ratio):
 				end = false
 				angry_meeple_list.append(i)
-			
+			else:
+				if object_meeple[i] != null:
+					object_meeple[i].set_meeple_mood("happy")
 			
 	if end == false:
 		teleporting_meeples = true
@@ -135,9 +138,7 @@ func teleport_meeples():
 	for wr in wr_list:
 		var obj = wr.get_ref()
 		if (obj):
-			wr.get_ref().kill()
 			obj.free()
-	wr_list.clear()
 	meeple_generator()
 	simulation()
 	
@@ -159,32 +160,42 @@ func initialize():
 
 func meeple_generator():
 	meeple_position_y = 640/height/2
+	object_meeple.clear()
 	for i in range(len(map)):
 		var right = (i % width == width-1)
 		var meeple_color = map[i]
 		if meeple_color == 1:
 			spawn_meeple()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 2:
 			spawn_meeple2()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 3:
 			spawn_meeple3()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 4:
 			spawn_meeple4()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 5:
 			spawn_meeple5()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 6:
 			spawn_meeple6()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 7:
 			spawn_meeple7()
+			object_meeple[i].set_meeple_mood("angry")
 		elif meeple_color == 8:
 			spawn_meeple8()
+			object_meeple[i].set_meeple_mood("angry")
+		elif meeple_color == 0:
+			object_meeple.append(null)
 			
 		if right: 
 			meeple_position_x = 320/width
 			meeple_position_y += 640/height
 		else:
 			meeple_position_x += 640/width
-		
 
 func spawn_meeple():
 	var meeple_instance = meeple.instance()
@@ -194,6 +205,7 @@ func spawn_meeple():
 	meeple_instance.position.y = meeple_position_y
 	
 	wr_list.append(weakref(meeple_instance))
+	object_meeple.append(meeple_instance)
 
 func spawn_meeple2():
 	var meeple_instance = meeple.instance()
@@ -203,6 +215,7 @@ func spawn_meeple2():
 	meeple_instance.position.y = meeple_position_y
 	
 	wr_list.append(weakref(meeple_instance))
+	object_meeple.append(meeple_instance)
 	
 func spawn_meeple3():
 	var meeple_instance = meeple.instance()
@@ -212,6 +225,7 @@ func spawn_meeple3():
 	meeple_instance.position.y = meeple_position_y
 	
 	wr_list.append(weakref(meeple_instance))
+	object_meeple.append(meeple_instance)
 	
 func spawn_meeple4():
 	var meeple_instance = meeple.instance()
@@ -221,6 +235,7 @@ func spawn_meeple4():
 	meeple_instance.position.y = meeple_position_y
 	
 	wr_list.append(weakref(meeple_instance))
+	object_meeple.append(meeple_instance)
 	
 func spawn_meeple5():
 	var meeple_instance = meeple.instance()
@@ -230,6 +245,7 @@ func spawn_meeple5():
 	meeple_instance.position.y = meeple_position_y
 	
 	wr_list.append(weakref(meeple_instance))
+	object_meeple.append(meeple_instance)
 	
 func spawn_meeple6():
 	var meeple_instance = meeple.instance()
@@ -239,6 +255,7 @@ func spawn_meeple6():
 	meeple_instance.position.y = meeple_position_y
 	
 	wr_list.append(weakref(meeple_instance))
+	object_meeple.append(meeple_instance)
 	
 func spawn_meeple7():
 	var meeple_instance = meeple.instance()
@@ -248,6 +265,7 @@ func spawn_meeple7():
 	meeple_instance.position.y = meeple_position_y
 	
 	wr_list.append(weakref(meeple_instance))
+	object_meeple.append(meeple_instance)
 	
 func spawn_meeple8():
 	var meeple_instance = meeple.instance()
@@ -257,6 +275,7 @@ func spawn_meeple8():
 	meeple_instance.position.y = meeple_position_y
 	
 	wr_list.append(weakref(meeple_instance))
+	object_meeple.append(meeple_instance)
 
 func _on_Timer_timeout():
 	if teleporting_meeples == true:
@@ -274,6 +293,9 @@ func set_tolerance(tolerance):
 func _on_Button_pressed():
 	teleporting_meeples = true
 	simulation()
+
+func _on_Reset_pressed():
+	get_tree().reload_current_scene()
 
 func set_colors(colors):
 	$Colors/Label.text = "Amount of Colors: " + str(colors)
