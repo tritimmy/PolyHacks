@@ -19,6 +19,7 @@ onready var teleporting_meeples = false
 
 func _ready():
 	randomize()
+	meeple_generator()
 	set_tolerance(acceptance_ratio)
 	initialize()
 	meeple_generator()
