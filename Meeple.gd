@@ -9,11 +9,11 @@ var inputs = {"ui_right": Vector2.RIGHT,
 			"ui_up": Vector2.UP,
 			"ui_down": Vector2.DOWN}
 
+var mood = "happy"
+
 func _ready():
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += Vector2.ONE * tile_size/2
-
-
 
 func move(dir):
 	position += inputs[dir] * tile_size
@@ -26,3 +26,9 @@ func change_size(new_size):
 
 func _on_Meeple_input_event(_viewport, _event, _shape_idx):
 	pass
+	
+func set_meeple_mood(mood):
+	if mood == "happy":
+		change_sprite(0, 0)
+	if mood == "angry":
+		change_sprite(0, 1)

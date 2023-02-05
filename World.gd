@@ -8,7 +8,7 @@ var angry_meeple_list = []
 var empty_spots_index = []
 var number_of_colors = 2
 var ratio_empty_spots = 0.2
-var acceptance_ratio = 0.5
+var acceptance_ratio = 50
 var ratio_of_meeple = [0.4, 0.4, 0, 0, 0, 0, 0, 0]
 
 onready var meeple_position_x = 32
@@ -19,7 +19,9 @@ onready var teleporting_meeples = false
 
 func _ready():
 	randomize()
+	set_tolerance(acceptance_ratio)
 	initialize()
+	
 
 func set_number_of_colors(new_number):
 	number_of_colors = new_number
@@ -108,9 +110,9 @@ func teleport_meeples():
 		map[end_position] = map[start_position]
 		map[start_position] = 0
 		empty_spots_index.append(start_position)
-		print(empty_spots_index)
-		empty_spots_index.pop(end_position)
-		print(empty_spots_index)
+		#print(empty_spots_index)
+		empty_spots_index.pop_at(end_position)
+		#print(empty_spots_index)
 	
 	empty_spots_index.clear()
 	angry_meeple_list.clear()
@@ -119,16 +121,16 @@ func teleport_meeples():
 	
 	
 func initialize():
-	for i in range(number_of_spots):
+	for _i in range(number_of_spots): # Resize
 		map.append(0)
-	for j in range(len(ratio_of_meeple)):
-		if(ratio_of_meeple[j] !=  0):
-			var number_of_specific_meeple = floor(ratio_of_meeple[j] * number_of_spots)
-			for k in range(number_of_specific_meeple):
+	for _j in range(len(ratio_of_meeple)):
+		if(ratio_of_meeple[_j] !=  0):
+			var number_of_specific_meeple = floor(ratio_of_meeple[_j] * number_of_spots)
+			for _k in range(number_of_specific_meeple):
 				var new_position = randi() % number_of_spots
 				while map[new_position] != 0:
 					new_position = randi() % number_of_spots
-				map[new_position] = j+1
+				map[new_position] = _j+1
 
 
 func meeple_generator():
@@ -221,9 +223,12 @@ func _on_Timer_timeout():
 		teleport_meeples()
 
 func _process(_delta):
-	$Tolerance/Label.text = "Tolerance: " + str($Tolerance/HSlider.value) + "%"
-	acceptance_ratio = $Tolerance/HSlider.value
+	set_tolerance($Tolerance/HSlider.value)
 
+func set_tolerance(tolerance):
+	$Tolerance/Label.text = "Tolerance: " + str(tolerance) + "%"
+	$Tolerance/HSlider.value = tolerance
+	acceptance_ratio = tolerance
 
 func _on_Button_pressed():
 	teleporting_meeples = true
