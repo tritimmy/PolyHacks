@@ -25,3 +25,14 @@ position = Vector2( 159, 69 )
 scale = Vector2( 1.53125, 1.40625 )
 
 [node name="Tolerance" parent="." instance=ExtResource( 3 )]
+z_index = 1
+
+[node name="Button" type="Node2D" parent="."]
+z_index = 1
+
+[node name="Button" type="Button" parent="Button"]
+margin_left = 323.0
+margin_top = 604.0
+margin_right = 463.0
+margin_bottom = 624.0
+text = "BEGIN SIMULATION"
