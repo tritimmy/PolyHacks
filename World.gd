@@ -22,6 +22,7 @@ func _ready():
 	meeple_generator()
 	set_tolerance(acceptance_ratio)
 	initialize()
+	meeple_generator()
 	
 
 func set_number_of_colors(new_number):
@@ -228,8 +229,8 @@ func _process(_delta):
 
 func set_tolerance(tolerance):
 	$Tolerance/Label.text = "Tolerance: " + str(tolerance) + "%"
-	$Tolerance/HSlider.value = tolerance 
-	acceptance_ratio = tolerance
+	$Tolerance/HSlider.value = tolerance
+	acceptance_ratio = tolerance/100
 
 func _on_Button_pressed():
 	teleporting_meeples = true
