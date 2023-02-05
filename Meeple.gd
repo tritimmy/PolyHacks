@@ -27,8 +27,13 @@ func change_size(new_size):
 func _on_Meeple_input_event(_viewport, _event, _shape_idx):
 	pass
 	
-func set_meeple_mood(mood):
-	if mood == "happy":
+func set_meeple_mood(_mood):
+	if _mood == "happy":
+		mood = "happy"
 		change_sprite(0, 0)
 	if mood == "angry":
+		mood = "angry"
 		change_sprite(0, 1)
+
+func kill():
+	queue_free()

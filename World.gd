@@ -4,6 +4,7 @@ var width = 10
 var height = width 
 var number_of_spots = width * height
 var map = []
+var wr_list = []
 var angry_meeple_list = []
 var empty_spots_index = []
 var number_of_colors = 2
@@ -19,7 +20,6 @@ onready var teleporting_meeples = false
 
 func _ready():
 	randomize()
-	meeple_generator()
 	set_tolerance(acceptance_ratio)
 	initialize()
 	meeple_generator()
@@ -113,11 +113,15 @@ func teleport_meeples():
 		map[start_position] = 0
 		empty_spots_index.append(start_position)
 		#print(empty_spots_index)
-		empty_spots_index.pop_at(end_position)
+		empty_spots_index.remove(end_position)
 		#print(empty_spots_index)
 	
 	empty_spots_index.clear()
 	angry_meeple_list.clear()
+	for wr in wr_list:
+		var obj = wr.get_ref()
+		if (obj):
+			wr.get_ref().kill()
 	meeple_generator()
 	simulation()
 	
@@ -169,6 +173,8 @@ func spawn_meeple():
 	add_child(meeple_instance)
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
+	
+	wr_list.append(weakref(meeple_instance))
 
 func spawn_meeple2():
 	var meeple_instance = meeple.instance()
@@ -177,12 +183,16 @@ func spawn_meeple2():
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
 	
+	wr_list.append(weakref(meeple_instance))
+	
 func spawn_meeple3():
 	var meeple_instance = meeple.instance()
 	meeple_instance.modulate = Color(255,0,255)
 	add_child(meeple_instance)
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
+	
+	wr_list.append(weakref(meeple_instance))
 	
 func spawn_meeple4():
 	var meeple_instance = meeple.instance()
@@ -191,12 +201,16 @@ func spawn_meeple4():
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
 	
+	wr_list.append(weakref(meeple_instance))
+	
 func spawn_meeple5():
 	var meeple_instance = meeple.instance()
 	meeple_instance.modulate = Color(225,0,0)
 	add_child(meeple_instance)
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
+	
+	wr_list.append(weakref(meeple_instance))
 	
 func spawn_meeple6():
 	var meeple_instance = meeple.instance()
@@ -205,6 +219,8 @@ func spawn_meeple6():
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
 	
+	wr_list.append(weakref(meeple_instance))
+	
 func spawn_meeple7():
 	var meeple_instance = meeple.instance()
 	meeple_instance.modulate = Color(225,255,255)
@@ -212,13 +228,16 @@ func spawn_meeple7():
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
 	
+	wr_list.append(weakref(meeple_instance))
+	
 func spawn_meeple8():
 	var meeple_instance = meeple.instance()
 	meeple_instance.modulate = Color(0,0,0)
 	add_child(meeple_instance)
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
-
+	
+	wr_list.append(weakref(meeple_instance))
 
 func _on_Timer_timeout():
 	if teleporting_meeples == true:
