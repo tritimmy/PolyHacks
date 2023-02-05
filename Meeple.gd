@@ -26,3 +26,6 @@ func change_sprite(color, state):
 
 func change_size(new_size):
 	tile_size = new_size
+
+func _on_Meeple_input_event(_viewport, _event, _shape_idx):
+	pass
