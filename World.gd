@@ -9,7 +9,7 @@ var angry_meeple_list = []
 var empty_spots_index = []
 var number_of_colors = 2
 var ratio_empty_spots = 0.2
-var acceptance_ratio = 0.5
+var acceptance_ratio = 50
 var ratio_of_meeple = [0.4, 0.4, 0, 0, 0, 0, 0, 0]
 
 onready var meeple_position_x = 32
@@ -116,7 +116,7 @@ func teleport_meeples():
 		map[start_position] = 0
 		empty_spots_index.append(start_position)
 		#print(empty_spots_index)
-		empty_spots_index.remove(end_position)
+		empty_spots_index.remove(empty_spots_index.find(end_position))
 		#print(empty_spots_index)
 	
 	empty_spots_index.clear()
@@ -125,6 +125,8 @@ func teleport_meeples():
 		var obj = wr.get_ref()
 		if (obj):
 			wr.get_ref().kill()
+			obj.free()
+	wr_list.clear()
 	meeple_generator()
 	simulation()
 	
