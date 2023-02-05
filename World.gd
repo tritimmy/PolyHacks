@@ -19,6 +19,7 @@ onready var teleporting_meeples = false
 
 func _ready():
 	randomize()
+	meeple_generator()
 	set_tolerance(acceptance_ratio)
 	initialize()
 	
@@ -227,7 +228,7 @@ func _process(_delta):
 
 func set_tolerance(tolerance):
 	$Tolerance/Label.text = "Tolerance: " + str(tolerance) + "%"
-	$Tolerance/HSlider.value = tolerance
+	$Tolerance/HSlider.value = tolerance 
 	acceptance_ratio = tolerance
 
 func _on_Button_pressed():
