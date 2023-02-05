@@ -15,6 +15,7 @@ onready var meeple_position_x = 32
 onready var meeple_position_y = 32
 var meeple = preload("res://Meeple.tscn")
 
+onready var teleporting_meeples = true
 
 func _ready():
 	randomize()
@@ -94,7 +95,7 @@ func simulation():
 			
 			
 	if end == false:
-		teleport_meeples()
+		teleporting_meeples = true
 		
 
 func teleport_meeples():
@@ -111,6 +112,7 @@ func teleport_meeples():
 		empty_spots_index.remove(end_position)
 		
 	angry_meeple_list.clear()
+	simulation()
 	
 	
 func initialize():
@@ -166,3 +168,8 @@ func spawn_meeple2():
 	add_child(meeple_instance)
 	meeple_instance.position.x = meeple_position_x
 	meeple_instance.position.y = meeple_position_y
+
+
+func _on_Timer_timeout():
+	if teleporting_meeples == true:
+		teleport_meeples()

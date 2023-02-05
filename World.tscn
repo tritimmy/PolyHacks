@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://Grid.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Tolerance.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/carte.jpeg" type="Texture" id=4]
-[ext_resource path="res://Crown.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,10 +19,6 @@ format = 1
 
 [node name="GridGenerator" parent="." instance=ExtResource( 2 )]
 
-[node name="Crown" parent="." instance=ExtResource( 5 )]
-position = Vector2( 159, 69 )
-scale = Vector2( 1.53125, 1.40625 )
-
 [node name="Tolerance" parent="." instance=ExtResource( 3 )]
 z_index = 1
 
@@ -36,3 +31,8 @@ margin_top = 604.0
 margin_right = 463.0
 margin_bottom = 624.0
 text = "BEGIN SIMULATION"
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

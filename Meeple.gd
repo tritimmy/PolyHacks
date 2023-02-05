@@ -23,3 +23,6 @@ func move(dir):
 
 func change_sprite(color, state):
 	sprite.set_frame(2 * color + state)
+
+func _on_Meeple_input_event(_viewport, _event, _shape_idx):
+	pass
